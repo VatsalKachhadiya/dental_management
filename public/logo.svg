@@ -1,0 +1,32 @@
+<svg width="300" height="300" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#003c8f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Tooth Shape -->
+  <path d="M180 120
+           C140 100, 90 140, 110 220
+           C130 300, 150 360, 180 360
+           C210 360, 200 260, 230 260
+           C260 260, 250 360, 280 360
+           C310 360, 330 300, 350 220
+           C370 140, 320 100, 280 120
+           C250 140, 210 140, 180 120 Z"
+        fill="url(#grad)"/>
+
+  <!-- Smile Curve -->
+  <path d="M140 230 Q260 160 360 240"
+        stroke="url(#grad)"
+        stroke-width="18"
+        fill="none"
+        stroke-linecap="round"/>
+
+  <!-- Sparkles -->
+  <polygon points="330,120 340,140 360,140 345,155 350,175 330,165 310,175 315,155 300,140 320,140"
+           fill="#4facfe"/>
+  <polygon points="300,170 305,180 315,180 307,188 310,198 300,192 290,198 293,188 285,180 295,180"
+           fill="#4facfe"/>
+</svg>
