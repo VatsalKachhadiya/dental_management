@@ -2,24 +2,29 @@ import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 import EmailTemplate from '@/emails';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export async function POST(req) {
+  const response = await req.json();
+  const result = response?.data;
+  const resendApiKey = process.env.RESEND_API_KEY;
 
-export async function POST(req){
+  if (!resendApiKey) {
+    return NextResponse.json(
+      { error: 'Missing RESEND_API_KEY environment variable.' },
+      { status: 500 }
+    );
+  }
 
-    const response=await req.json()
-    const result=response.data;
-    try{
+  try {
+    const resend = new Resend(resendApiKey);
+    const data = await resend.emails.send({
+      from: 'Doctor-Appointment-Booking@tubeguruji-app.tubeguruji.com',
+      to: [result?.Email],
+      subject: 'Appointment Booking Confirmation',
+      react: EmailTemplate(result),
+    });
 
-        const data=await resend.emails.send({
-            from: 'Doctor-Appointment-Booking@tubeguruji-app.tubeguruji.com',
-            to: [response.data.Email],
-            subject: 'Appointment Booking Confirmation',
-            react: EmailTemplate({result})
-          });
-        return NextResponse.json({data})
-    }
-    catch(error)
-    {
-        return NextResponse.json({error})
-    }
+    return NextResponse.json({ data });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
 }
